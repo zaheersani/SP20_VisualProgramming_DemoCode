@@ -6,6 +6,15 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            Mobile mObj = new Mobile()
+            {
+                Model = "iPhone X",
+                Batter = new Battery("li-On", "300 Hrs")
+            };
+            Console.WriteLine("Mobile: " + mObj.Model);
+            Console.WriteLine("Battery Idel Hours: " + mObj.Batter.HourseIdle);
+
+            Console.WriteLine(@"H""e""llo");
             Console.WriteLine("Args Length: " + args.Length);
             if (args.Length > 0)
             {
@@ -51,6 +60,27 @@ namespace ConsoleApp
                 if(value.Length > 0 && value.Length < 50)
                     this.name = value;
             }
+        }
+    }
+
+    public class Mobile
+    {
+        public string Model { get; set; }
+        public Battery Batter { get; set; }
+
+    }
+
+    public class Battery
+    {
+        private string model;
+        private string hoursIdle;
+        public Battery(string Model, string HourseIdle)
+        {
+            this.model = Model;
+            this.hoursIdle = HourseIdle;
+        }
+        public string HourseIdle {
+            get { return this.hoursIdle; }
         }
     }
 
