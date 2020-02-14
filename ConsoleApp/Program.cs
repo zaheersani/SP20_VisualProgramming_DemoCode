@@ -35,6 +35,7 @@ namespace ConsoleApp
 
         public Student() : this("", 0, "")
         {
+
         }
         public Student(string Name, int Age, string RegistrationNo)
         {
