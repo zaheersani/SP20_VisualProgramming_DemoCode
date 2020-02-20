@@ -6,68 +6,126 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Mobile mObj = new Mobile()
+            Student s1 = new Student()
             {
-                Model = "iPhone X",
-                Batter = new Battery("li-On", "300 Hrs")
+                FirstName = "Muhammad",
+                 LastName= "Naseem",
+                 RegNo = "SP01-BSE-098",
+                 DateOfBirth = new DateTime(1993, 3, 4)
             };
-            Console.WriteLine("Mobile: " + mObj.Model);
-            Console.WriteLine("Battery Idel Hours: " + mObj.Batter.HourseIdle);
-
-            Console.WriteLine(@"H""e""llo");
-            Console.WriteLine("Args Length: " + args.Length);
-            if (args.Length > 0)
+            Student s2 = new Student()
             {
-                Console.WriteLine("Arguemnt 1: " + args[0]);
-                if (args.Length > 1)
-                {
-                    Console.WriteLine("Arguemnt 2: " + args[1]);
-                }
-            }
+                FirstName = "Ali",
+                LastName = "Hassan",
+                RegNo = "SP01-BSE-090",
+                DateOfBirth = new DateTime(1995, 2, 6)
+            };
+            Faculty f1 = new Faculty()
+            {
+                FirstName = "Dr. Ahmed",
+                LastName = "Khan",
+                Department = "Physics",
+                Designation = "Associate Professor",
+                DateOfBirth = new DateTime(1975, 1, 10)
+            };
 
-            Student s1 = new Student("Ahmed", 25, "SP12-BCS-098");
-            s1.Name = "Zafar";
-            //s1.RegNo = "SP12-BCS-098";
-            Console.WriteLine(s1.Name);
-            Console.WriteLine(s1.RegNo);
+            Console.WriteLine("Student 1 is equal to Student 2: " + s1.isEqual(s2));
+            Console.WriteLine(f1);
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
         }
     }
 
-    public class Student
+    public interface IEqual<T>
     {
-        private string name;
-        private int age;
+        bool isEqual(T obj);
+    }
+
+    abstract public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        abstract public string getAge();
+    }
+
+    public class Student : Person, IEqual<Student>
+    {
         public string RegNo { get; set; }
 
-        public Student() : this("", 0, "")
+        public override string getAge()
         {
+            return this.DateOfBirth.Year.ToString();
+        }
 
-        }
-        public Student(string Name, int Age, string RegistrationNo)
+        public bool isEqual(Student student)
         {
-            this.name = Name;
-            this.age = Age;
-            this.RegNo = RegistrationNo;
+            return this.RegNo == student.RegNo;
         }
-        public string Name
+
+        public override string ToString()
         {
-            get { return this.name;  }
-            set
-            {
-                if(value.Length > 0 && value.Length < 50)
-                    this.name = value;
-            }
+            return this.FirstName + " " + this.LastName + 
+                " RegNo: " + this.RegNo + 
+                " DOB: " + this.DateOfBirth.ToString();
+        }
+    }
+
+    public class Faculty : Person, IEqual<Faculty>
+    {
+        public string Department { get; set; }
+        public string Designation { get; set; }
+
+        public override string getAge()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool isEqual(Faculty faculty)
+        {
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return this.FirstName + " " + this.LastName + 
+                " Department: " + this.Department + " Designation: " + this.Designation + 
+                " DOB: " + this.DateOfBirth.ToString();
+        }
+    }
+
+    public class A
+    {
+        private int a, b;
+        public A()
+        {
+            this.a = this.b = 0;
+        }
+        public A(int a, int b)
+        {
+            this.a = a;
+            this.b = b;
+        }
+    }
+    public class B : A
+    {
+        private int c;
+        public B() : base()
+        {
+            this.c = 0;
+        }
+        public B(int a, int b, int c) : base(a, b)
+        {
+            this.c = c;
         }
     }
 
     public class Mobile
     {
         public string Model { get; set; }
-        public Battery Batter { get; set; }
-
+        public Battery Battery { get; set; }
     }
 
     public class Battery
@@ -81,6 +139,15 @@ namespace ConsoleApp
         }
         public string HourseIdle {
             get { return this.hoursIdle; }
+        }
+
+        public string Model
+        {
+            get { return this.model; }
+            //set {
+            //    if(value != null)
+            //        this.model = value;
+            //}
         }
     }
 
