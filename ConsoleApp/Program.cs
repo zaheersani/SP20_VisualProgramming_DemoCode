@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -6,6 +7,13 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            //List<int> list = new List<int>();
+            //list.Add(1);
+            //list.Add(2);
+            //list.Add(3);
+            //Console.WriteLine(list[0]);
+            //list[0] = 111;
+
             Student s1 = new Student()
             {
                 FirstName = "Muhammad",
@@ -13,6 +21,11 @@ namespace ConsoleApp
                  RegNo = "SP01-BSE-098",
                  DateOfBirth = new DateTime(1993, 3, 4)
             };
+            Console.WriteLine(s1.FirstName + " is taking course at " + s1[100, true]);
+            string courseToSearch = "ict";
+            Console.WriteLine(s1.FirstName + " is taking " + courseToSearch + " :" + s1[courseToSearch]);
+            Console.WriteLine("Coures:" + s1.Courses.Count);
+
             Student s2 = new Student()
             {
                 FirstName = "Ali",
@@ -37,64 +50,7 @@ namespace ConsoleApp
         }
     }
 
-    public interface IEqual<T>
-    {
-        bool isEqual(T obj);
-    }
-
-    abstract public class Person
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
-
-        abstract public string getAge();
-    }
-
-    public class Student : Person, IEqual<Student>
-    {
-        public string RegNo { get; set; }
-
-        public override string getAge()
-        {
-            return this.DateOfBirth.Year.ToString();
-        }
-
-        public bool isEqual(Student student)
-        {
-            return this.RegNo == student.RegNo;
-        }
-
-        public override string ToString()
-        {
-            return this.FirstName + " " + this.LastName + 
-                " RegNo: " + this.RegNo + 
-                " DOB: " + this.DateOfBirth.ToString();
-        }
-    }
-
-    public class Faculty : Person, IEqual<Faculty>
-    {
-        public string Department { get; set; }
-        public string Designation { get; set; }
-
-        public override string getAge()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool isEqual(Faculty faculty)
-        {
-            return true;
-        }
-
-        public override string ToString()
-        {
-            return this.FirstName + " " + this.LastName + 
-                " Department: " + this.Department + " Designation: " + this.Designation + 
-                " DOB: " + this.DateOfBirth.ToString();
-        }
-    }
+    
 
     public class A
     {
