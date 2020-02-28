@@ -7,24 +7,22 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            //List<int> list = new List<int>();
-            //list.Add(1);
-            //list.Add(2);
-            //list.Add(3);
-            //Console.WriteLine(list[0]);
-            //list[0] = 111;
+            new Runner();
 
             Student s1 = new Student()
             {
                 FirstName = "Muhammad",
                  LastName= "Naseem",
                  RegNo = "SP01-BSE-098",
-                 DateOfBirth = new DateTime(1993, 3, 4)
+                 DateOfBirth = new DateTime(1993, 3, 4),
+                 CUIProgram = DegreeProgram.BSSE
             };
-            Console.WriteLine(s1.FirstName + " is taking course at " + s1[100, true]);
-            string courseToSearch = "ict";
-            Console.WriteLine(s1.FirstName + " is taking " + courseToSearch + " :" + s1[courseToSearch]);
-            Console.WriteLine("Coures:" + s1.Courses.Count);
+            Console.WriteLine(Visitor.WhereToGo(Department.ComputerScience));
+            Console.WriteLine(s1.whereToGo());
+            //Console.WriteLine(s1.FirstName + " is taking course at " + s1[100, true]);
+            //string courseToSearch = "ict";
+            //Console.WriteLine(s1.FirstName + " is taking " + courseToSearch + " :" + s1[courseToSearch]);
+            //Console.WriteLine("Coures:" + s1.Courses.Count);
 
             Student s2 = new Student()
             {

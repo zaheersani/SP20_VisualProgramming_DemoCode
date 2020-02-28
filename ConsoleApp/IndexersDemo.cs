@@ -17,9 +17,37 @@ namespace ConsoleApp
         abstract public string getAge();
     }
 
+    public enum DegreeProgram { BSCS, BSSE, BBA, BTE }
+
+    public enum Department { ComputerScience, ManagementSciences, ElectricalEngineering }
+
+    public class Visitor
+    {
+        public static string WhereToGo(Department dept)
+        {
+            if (dept == Department.ComputerScience)
+                return "Academic Block-II, Ground Floor";
+            return null;
+        }
+    }
+
     public class Student : Person, IEqual<Student>
     {
         public string RegNo { get; set; }
+        public DegreeProgram CUIProgram { get; set; }
+
+        public string whereToGo()
+        {
+            DegreeProgram degreeProgram = this.CUIProgram;
+            if (degreeProgram == DegreeProgram.BSCS || degreeProgram == DegreeProgram.BSSE)
+                return "Academic Block-II";
+            else if (degreeProgram == DegreeProgram.BBA)
+                return "Academic Block-III";
+            else if (degreeProgram == DegreeProgram.BTE)
+                return "Academic Block-I/EE Block";
+            return null;
+        }
+
         private List<string> courses = new List<string>()
         {
             "ICT",
