@@ -7,48 +7,56 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            new Runner();
+            double a = 10, b = 0;
+            //a = int.Parse(Console.ReadLine());
+            Console.WriteLine(a / b);
+            //Console.WriteLine(10 / 0);
 
-            Student s1 = new Student()
+            Employee emp1 = new Employee()
             {
-                FirstName = "Muhammad",
-                 LastName= "Naseem",
-                 RegNo = "SP01-BSE-098",
-                 DateOfBirth = new DateTime(1993, 3, 4),
-                 CUIProgram = DegreeProgram.BSSE
-            };
-            Console.WriteLine(Visitor.WhereToGo(Department.ComputerScience));
-            Console.WriteLine(s1.whereToGo());
-            //Console.WriteLine(s1.FirstName + " is taking course at " + s1[100, true]);
-            //string courseToSearch = "ict";
-            //Console.WriteLine(s1.FirstName + " is taking " + courseToSearch + " :" + s1[courseToSearch]);
-            //Console.WriteLine("Coures:" + s1.Courses.Count);
-
-            Student s2 = new Student()
-            {
-                FirstName = "Ali",
-                LastName = "Hassan",
-                RegNo = "SP01-BSE-090",
-                DateOfBirth = new DateTime(1995, 2, 6)
-            };
-            Faculty f1 = new Faculty()
-            {
-                FirstName = "Dr. Ahmed",
-                LastName = "Khan",
-                Department = "Physics",
-                Designation = "Associate Professor",
-                DateOfBirth = new DateTime(1975, 1, 10)
+                Name = "Zaheer",
+                Department = "Computer Science",
+                Tasks = new List<DeptTask>()
+                {
+                    new DeptTask("C1", 2, "Take Lab Today"),
+                    new DeptTask("C2", 3, "Having FYP Meeting"),
+                    new DeptTask("C3", 1, "Schedule Lab Tomorrow"),
+                    new DeptTask("C4", 1, "Take FYP Evaluation"),
+                }
             };
 
-            Console.WriteLine("Student 1 is equal to Student 2: " + s1.isEqual(s2));
-            Console.WriteLine(f1);
+            Console.WriteLine(emp1[1].Description);
+            string taskCode = "C1";
+            Console.WriteLine("Task Details having Code:{0}", taskCode);
+            Console.WriteLine("Description:{0}",emp1[taskCode].Description);
+            Console.WriteLine("Priority:{0}",emp1[taskCode].Priority);
+            Console.WriteLine("------------");
+
+            string taskDesc = "FYP";
+            Console.WriteLine("Task Details having Description:{0}", taskDesc);
+            List<DeptTask> tasks = emp1[taskDesc,true];
+            foreach (DeptTask item in tasks)
+            {
+                //Console.WriteLine("Task List having Description:" + taskDesc);
+                Console.WriteLine("Code:" + item.Code);
+                Console.WriteLine("Priority:" + item.Priority);
+                Console.WriteLine("Description:" + item.Description);
+            }
+
             Console.ReadKey();
+            return;
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            Box b1 = new Box(2,2,2);
+            Box b2 = new Box(1,1,1);
+            if(b2 > b1)
+                Console.WriteLine("box1 is greater than box2");
+            else
+                Console.WriteLine("box1 is smaller than box2");
+
+            Console.WriteLine("Addition: " + (b1 + b2).getVolume());
+            Console.ReadKey();
         }
     }
-
-    
 
     public class A
     {
